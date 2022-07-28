@@ -22,7 +22,7 @@ const prisma = new Prisma.PrismaClient({
   ],
 });
 
-prisma.$on("query", e => logger.info(`[Query]: ${e.query} (${e.duration}ms)`));
+prisma.$on("query", (e: any) => logger.info(`[Query]: ${e.query} (${e.duration}ms)`));
 
 prisma.$on("error", logger.error);
 
@@ -41,32 +41,5 @@ export const testConnection = async () => {
     throw e;
   }
 };
-
-// /**
-//  * @param cursor {?*}
-//  * @param take {?number}
-//  * @param where {object}
-//  * @param orderBy {?object}
-//  * @returns {object}
-//  */
-// export const paginationQuery = ({
-//                                   cursor,
-//                                   take,
-//                                   where,
-//                                   orderBy,
-//                                 }) => {
-//   const query = {
-//     where,
-//     take: take || 10,
-//     orderBy: orderBy || { id: "desc" },
-//   };
-//
-//   if (cursor) {
-//     query.cursor = { id: cursor };
-//     query.skip = 1;
-//   }
-//
-//   return query;
-// };
 
 export default prisma;
