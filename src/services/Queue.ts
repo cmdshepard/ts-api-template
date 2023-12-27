@@ -8,8 +8,6 @@ export default class Queue {
 
   public worker: BullMQ.Worker;
 
-  public scheduler: BullMQ.QueueScheduler;
-
   constructor({
     name,
     defaultJobOpts,
@@ -25,8 +23,6 @@ export default class Queue {
       defaultJobOptions: defaultJobOpts,
       connection: redis,
     });
-
-    this.scheduler = new BullMQ.QueueScheduler(name, { connection: redis });
 
     const processor = async (...args: any[]): Promise<any> => {
       const job: BullMQ.Job = args[0];
@@ -44,10 +40,10 @@ export default class Queue {
     });
 
     this.worker.on("failed", (job, failedReason) => {
-      logger.error(`Job ${job.name} failed due to reason:`);
+      logger.error(`Job ${job?.name} failed due to reason:`);
       logger.error(failedReason);
       logger.error("Job data:");
-      logger.error(job.data);
+      logger.error(job?.data || "No data");
     });
 
     this.worker.on("error", e => {
