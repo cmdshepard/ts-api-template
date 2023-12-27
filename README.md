@@ -21,14 +21,20 @@ An opinionated template for building a NodeJS/TypeScript API.
 ## Setup Development
 Install Node & Node modules, then set environment variables.
 ```bash
-# Install Node 16
-$ nvm install 16
+# Install Node 18
+$ nvm install 18
 
-# Use Node 16 in current shell session
+# Use Node 18 in current shell session
 $ nvm use
 
 # Install Node modules
 $ yarn
+
+# Create a PostgreSQL database in a Docker container
+$ yarn db:create
+
+# Create a Redis database in a Docker container
+$ yarn redis:create
 
 # Copy environment variables
 $ cp .env.example .env
