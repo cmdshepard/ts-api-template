@@ -49,8 +49,3 @@ $ nvm use
 # Start the server
 $ yarn start
 ```
-
-## Run Unit Tests
-```bash
-$ yarn test
-```

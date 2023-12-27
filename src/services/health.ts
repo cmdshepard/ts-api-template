@@ -13,13 +13,13 @@ class Health {
     this.router.get("/liveness", this.livenessHandler);
   }
 
-  private readinessHandler(_: Request, res: Response) {
+  private readinessHandler = (_: Request, res: Response) => {
     res.sendStatus(this.isReady ? 200 : 500);
-  }
+  };
 
-  private livenessHandler(_: Request, res: Response) {
+  private livenessHandler = (_: Request, res: Response) => {
     res.sendStatus(this.isLive ? 200 : 500);
-  }
+  };
 
 }
 
