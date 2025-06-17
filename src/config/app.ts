@@ -24,17 +24,24 @@ app.use(morgan(":ts [res] :method :url :status - :response-time ms"));
 
 const server: Server = http.createServer(app);
 
-Promise.all([
-  testConnection(),
-]).then(() => {
-  server.listen(port);
+export const startServer = async (): Promise<void> => {
+  await Promise.all([
+    testConnection(),
+  ]).then(() => {
+    server.listen(port);
 
-  health.isLive = true;
-  health.isReady = true;
+    health.isLive = true;
+    health.isReady = true;
 
-  logger.info(`Server listening on port ${port}`);
-}).catch((e: any) => {
-  logger.error(e);
+    logger.info(`Server listening on port ${port}`);
+  }).catch((e: any) => {
+    logger.error(e);
+    process.exit(1);
+  });
+};
+
+startServer().catch((e: any) => {
+  console.error(e);
   process.exit(1);
 });
 
