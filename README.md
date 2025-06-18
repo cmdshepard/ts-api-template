@@ -21,8 +21,8 @@ An opinionated template for building a NodeJS/TypeScript API.
 ## Setup Development
 Install Node & Node modules, then set environment variables.
 ```bash
-# Install Node 18
-$ nvm install 18
+# Install Node 22
+$ nvm install 22
 
 # Use Node 18 in current shell session
 $ nvm use
