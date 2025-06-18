@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { getAuth } from "firebase-admin/auth";
 import render401 from "./render401.js";
+import logger from "../services/logger.js";
 
 const authenticate = () => async (req: Request, res: Response, next: NextFunction) => {
   const authorization = req.get("authorization");
@@ -18,6 +19,7 @@ const authenticate = () => async (req: Request, res: Response, next: NextFunctio
     decodedToken = await auth.verifyIdToken(token);
     user = await auth.getUser(decodedToken.uid);
   } catch (e) {
+    logger.error(e);
     return render401(res);
   }
 

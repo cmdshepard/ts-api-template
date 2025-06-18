@@ -24,11 +24,11 @@ const prisma = new Prisma.PrismaClient({
 
 prisma.$on("query", (e: Prisma.Prisma.QueryEvent) => logger.info(`[Query]: ${e.query} (${e.duration}ms)`));
 
-prisma.$on("error", logger.error);
+prisma.$on("error", e => logger.error(e));
 
-prisma.$on("info", logger.info);
+prisma.$on("info", e => logger.info(e));
 
-prisma.$on("warn", logger.warn);
+prisma.$on("warn", e => logger.warn(e));
 
 export const testConnection = async (): Promise<void> => {
   logger.info("Attempting to connect to the database...");
